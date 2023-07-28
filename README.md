@@ -22,13 +22,14 @@ In the past few years, Neural Machine Translation approaches and Transformer bas
  
  We have used an iterative sequence tagger based on a transformer encoder to predict token-level edit operations for correcting the preposition errors in a sentence. For each source token in the input sentence, a softmax layer on the top of the encoder predicts an edit operation out of a confusion set. The system predicts four basic edit operations namely keep a token, delete a token, append a token and replace a token. The system is trained over a synthetic dataset constructed by us using Google's one billion word corpus. Additionally, we have incorporated in our training procedure the new state-of-the-art Ranger2 optimiser which is a combination of Rectified Adam and lookahead optimiser. It is known to outperform all other optimisers for the image classification task on the Imagewoof dataset3. However, not much analysis has been done on the performance of the optimiser in the field of natural language processing which proved to be a motivation for us to incorporate it into our system.
 Some improvements of our system over the previously discussed approaches are:
+
 ● Ranger optimiser helps to increase the speed of training and also the accuracy of the system.
 ● Synthetic data eliminates the need for large quantities of human-annotated data. Small and diverse datasets will serve the purpose of augmenting large datasets for training.
 
 
 ## Method
 
-Our proposed system is an iterative sequence tagger which is inspired by GECToR. It is an encoder made up of a pre-trained BERT-like transformer- xlnet stacked with two linear layers and softmax layers on the top. The system is trained for tagging each token xi in the input (incorrect) sentence (x1....xN) with a token-level transformation T(xi) discussed in section 1.2. These predicted tag-encoded transformations are then applied to the input sentence to recover the output sentence. We have used iterative tagging as it may take more than one iteration of prediction and correction for sentences having multiple preposition errors. The steps involved in the construction of our system are given as follows:
+Our proposed system is an iterative sequence tagger which is inspired by GECToR. It is an encoder made up of a pre-trained BERT-like transformer- xlnet stacked with two linear layers and softmax layers on the top. The system is trained for tagging each token xi in the input (incorrect) sentence (x1....xN) with a token-level transformation T(xi). These predicted tag-encoded transformations are then applied to the input sentence to recover the output sentence. We have used iterative tagging as it may take more than one iteration of prediction and correction for sentences having multiple preposition errors. The steps involved in the construction of our system are given as follows:
 1. Construction of the dataset
 2. Preprocessing of data.
 3. Training.
